@@ -1,4 +1,4 @@
-package io.github.danilkuznetsov.googleservice.service;
+package io.github.danilkuznetsov.google.service;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;

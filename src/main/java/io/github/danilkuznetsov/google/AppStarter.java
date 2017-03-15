@@ -1,8 +1,8 @@
-package io.github.danilkuznetsov.googleservice;
+package io.github.danilkuznetsov.google;
 
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
-import io.github.danilkuznetsov.googleservice.service.GoogleServices;
+import io.github.danilkuznetsov.google.service.GoogleServices;
 
 import java.io.IOException;
 import java.io.InputStream;
