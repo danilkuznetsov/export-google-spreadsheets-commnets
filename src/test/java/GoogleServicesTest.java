@@ -18,7 +18,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
  * @author Danil Kuznetsov
  */
 @RunWith(JUnit4.class)
-public class GoogleServicesUnitTest {
+public class GoogleServicesTest {
 
     @Test
     public void shouldCreateGoogleServiceInstance() throws GeneralSecurityException, IOException {
@@ -42,7 +42,5 @@ public class GoogleServicesUnitTest {
                 .applicationName("Export Google Spreadsheets Comments")
                 .scope(DriveScopes.DRIVE)
                 .build();
-
-        Drive drive = googleServices.googleDrive();
     }
 }
