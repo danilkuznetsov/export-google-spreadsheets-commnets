@@ -1,4 +1,4 @@
-package io.github.danilkuznetsov.google.service;
+package io.github.danilkuznetsov.google.model;
 
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.Comment;

@@ -2,7 +2,7 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import io.github.danilkuznetsov.google.AppStarter;
 import io.github.danilkuznetsov.google.service.GoogleServices;
-import io.github.danilkuznetsov.google.service.GoogleSpreadSheetsFile;
+import io.github.danilkuznetsov.google.model.GoogleSpreadSheetsFile;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
