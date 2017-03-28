@@ -30,20 +30,24 @@ public class GoogleServices {
 
     private final HttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 
-    private String applicationName = "Example Application";
+    private String applicationName;
 
-    private File dataStoreDir = new File(System.getProperty("user.home"),
-            ".credentials/google.service.data");
+    private File dataStoreDir;
 
-    private List<String> scopes = new ArrayList<>();
+    private List<String> scopes;
 
     private InputStream clientSecrets;
 
-    public GoogleServices() throws GeneralSecurityException, IOException {}
-
-    public static GoogleServices newGoogleService() throws GeneralSecurityException, IOException {
-        return new GoogleServices();
+    private GoogleServices(String applicationName,
+                           File dataStoreDir,
+                           List<String> scopes,
+                           InputStream clientSecrets) throws GeneralSecurityException, IOException {
+        this.applicationName = applicationName;
+        this.dataStoreDir = dataStoreDir;
+        this.scopes = scopes;
+        this.clientSecrets = clientSecrets;
     }
+
 
     private Credential authorize(FileDataStoreFactory dataStoreFactory) throws IOException {
 
@@ -70,23 +74,47 @@ public class GoogleServices {
         return new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(applicationName).build();
     }
 
-    public GoogleServices clientSecret(InputStream clientSecrets) {
-        this.clientSecrets = clientSecrets;
-        return this;
+    public static GoogleServiceBuilder newGoogleService() throws GeneralSecurityException, IOException {
+        return new GoogleServiceBuilder();
     }
 
-    public GoogleServices applicationName(String appName) {
-        applicationName = appName;
-        return this;
+    public static class GoogleServiceBuilder {
+
+        private String applicationName = "Example Application";
+
+        private File dataStoreDir = new File(System.getProperty("user.home"), ".credentials/google.service.data");
+
+        private List<String> scopes = new ArrayList<>();
+
+        private InputStream clientSecrets;
+
+        public GoogleServiceBuilder clientSecret(InputStream clientSecrets) {
+            this.clientSecrets = clientSecrets;
+            return this;
+        }
+
+        public GoogleServiceBuilder applicationName(String appName) {
+            this.applicationName = appName;
+            return this;
+        }
+
+        public GoogleServiceBuilder scope(String scope) {
+            this.scopes.add(scope);
+            return this;
+        }
+
+
+        public GoogleServiceBuilder dataStoreDir(File dir) {
+            this.dataStoreDir = dir;
+            return this;
+        }
+
+        public GoogleServices build() throws GeneralSecurityException, IOException {
+            if (clientSecrets == null) {
+                throw new IllegalArgumentException("Not found client secret");
+            }
+            return new GoogleServices(applicationName, dataStoreDir, scopes, clientSecrets);
+        }
     }
 
-    public GoogleServices scope(String scope) {
-        scopes.add(scope);
-        return this;
-    }
-
-    public GoogleServices dataStoreDir(File dir) {
-        this.dataStoreDir = dir;
-        return this;
-    }
 }

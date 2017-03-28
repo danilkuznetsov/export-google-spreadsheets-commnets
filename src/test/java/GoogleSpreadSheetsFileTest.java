@@ -37,7 +37,8 @@ public class GoogleSpreadSheetsFileTest {
         GoogleServices googleServices = GoogleServices.newGoogleService()
                 .clientSecret(clientSecret)
                 .applicationName("Export Google Spreadsheets Comments")
-                .scope(DriveScopes.DRIVE);
+                .scope(DriveScopes.DRIVE)
+                .build();
 
         drive = googleServices.googleDrive();
     }
