@@ -1,7 +1,8 @@
+package io.github.danilkuznetsov.google.service;
+
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import io.github.danilkuznetsov.google.AppStarter;
-import io.github.danilkuznetsov.google.service.GoogleServices;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -24,7 +25,7 @@ public class GoogleServicesTest {
     public void shouldCreateGoogleServiceInstance() throws GeneralSecurityException, IOException {
         InputStream clientSecret = AppStarter.class.getResourceAsStream("/client_secret.json");
 
-        Drive drive = null;
+        Drive drive;
         GoogleServices googleServices = GoogleServices.newGoogleService()
                 .clientSecret(clientSecret)
                 .applicationName("Export Google Spreadsheets Comments")
@@ -37,8 +38,7 @@ public class GoogleServicesTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenClientSecretNotFound() throws GeneralSecurityException, IOException {
-
-        GoogleServices googleServices = GoogleServices.newGoogleService()
+        GoogleServices.newGoogleService()
                 .applicationName("Export Google Spreadsheets Comments")
                 .scope(DriveScopes.DRIVE)
                 .build();
