@@ -14,7 +14,7 @@ public class DirtyCommentsTest {
             "TestReply2\n" +
             "\t-Danil Kuznetsov\n" +
             "_Re-opened_\n" +
-            "[AAAABIMj-j4]\n" +
+            "MainCommentID[AAAABIMj-j4]\n" +
             "\t-Danil Kuznetsov";
 
     private final String COMMENTS_AND_REPLIES_WITHOUT_COMMENT_ID = "TestComment2\n" +

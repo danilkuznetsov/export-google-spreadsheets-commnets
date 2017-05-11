@@ -35,7 +35,7 @@ public class GoogleSpreadSheetsFile {
         HashMap<String, String> result = new HashMap<>();
 
         for (Comment comment : comments) {
-            Reply reply = addReply(comment.getId(), "[" + comment.getId() + "]");
+            Reply reply = addReply(comment.getId(), "MainCommentID[" + comment.getId() + "]");
             result.put(comment.getId(), reply.getId());
         }
 

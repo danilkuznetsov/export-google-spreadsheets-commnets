@@ -22,10 +22,10 @@ public class DirtyComments {
     private String comments;
 
     public String getMainCommentId() {
-        Pattern pattern = Pattern.compile(".*\\[.*\\].*", Pattern.MULTILINE);
+        Pattern pattern = Pattern.compile(".*\\[(.*)\\].*", Pattern.MULTILINE);
         Matcher matcher = pattern.matcher(comments);
         if (matcher.find()) {
-            return comments.substring(matcher.start()+1, matcher.end()-1);
+            return matcher.group(1);
         }
         throw new IllegalStateException("Comment id no found");
     }
