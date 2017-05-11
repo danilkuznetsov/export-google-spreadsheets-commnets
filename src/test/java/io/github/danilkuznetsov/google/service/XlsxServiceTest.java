@@ -27,9 +27,12 @@ public class XlsxServiceTest {
         XlsxService xlsxService = new XlsxService();
         List<DirtyComments> actualComments = xlsxService.fetchFullComments(fis);
 
-        assertThat(actualComments, hasSize(2));
+        assertThat(actualComments, hasSize(5));
         assertThat(actualComments, everyItem(hasProperty("comments", notNullValue())));
-        assertThat(actualComments, everyItem(hasProperty("col", is(1))));
+        assertThat(actualComments, hasItem(hasProperty("col", equalTo(1))));
+        assertThat(actualComments, hasItem(hasProperty("col", equalTo(2))));
         assertThat(actualComments, everyItem(hasProperty("row", notNullValue())));
+        assertThat(actualComments,hasItem(hasProperty("sheetName",equalTo("TestSheet"))));
+        assertThat(actualComments,hasItem(hasProperty("sheetName",equalTo("ClassData"))));
     }
 }

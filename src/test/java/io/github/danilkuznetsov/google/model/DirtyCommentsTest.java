@@ -28,7 +28,7 @@ public class DirtyCommentsTest {
     public void shouldDecodeMainCommentIdFromStringReplies() {
 
         // given
-        DirtyComments comments = new DirtyComments(0, 0, COMMENTS_AND_REPLIES_WITH_COMMENT_ID);
+        DirtyComments comments = new DirtyComments("test",0, 0, COMMENTS_AND_REPLIES_WITH_COMMENT_ID);
         String expectedCommentId = "AAAABIMj-j4";
 
         //when
@@ -41,7 +41,7 @@ public class DirtyCommentsTest {
     @Test(expected = IllegalStateException.class)
     public void shouldThrowExceptionWhenIdNotFound() {
         //given
-        DirtyComments comments = new DirtyComments(0, 0, COMMENTS_AND_REPLIES_WITHOUT_COMMENT_ID);
+        DirtyComments comments = new DirtyComments("test",0, 0, COMMENTS_AND_REPLIES_WITHOUT_COMMENT_ID);
         //when
         String actual = comments.getMainCommentId();
     }

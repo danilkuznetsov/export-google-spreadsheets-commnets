@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 @AllArgsConstructor
 @ToString
 public class DirtyComments {
+    private String sheetName;
     private int row;
     private int col;
     private String comments;
