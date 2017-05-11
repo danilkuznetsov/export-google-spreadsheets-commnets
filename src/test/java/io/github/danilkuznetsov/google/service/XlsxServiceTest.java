@@ -1,6 +1,6 @@
 package io.github.danilkuznetsov.google.service;
 
-import io.github.danilkuznetsov.google.model.FullComments;
+import io.github.danilkuznetsov.google.model.DirtyComments;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -25,7 +25,7 @@ public class XlsxServiceTest {
 
         FileInputStream fis = new FileInputStream(new File("src/test/resources/test_export.xlsx"));
         XlsxService xlsxService = new XlsxService();
-        List<FullComments> actualComments = xlsxService.fetchFullComments(fis);
+        List<DirtyComments> actualComments = xlsxService.fetchFullComments(fis);
 
         assertThat(actualComments, hasSize(2));
         assertThat(actualComments, everyItem(hasProperty("comments", notNullValue())));
