@@ -6,7 +6,6 @@ import com.google.api.services.drive.model.Reply;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,12 +42,12 @@ public class GoogleSpreadSheetsFile {
         return result;
     }
 
-    public OutputStream exportToXlsx() throws IOException {
+    public byte[] exportToXlsx() throws IOException {
         ByteArrayOutputStream xlsx = new ByteArrayOutputStream();
         drive.files()
                 .export(fileId, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
                 .executeMediaAndDownloadTo(xlsx);
-        return xlsx;
+        return xlsx.toByteArray();
     }
 
     public List<String> removeRepliesByCommentId(Map<String, String> repliesForDeletion) {

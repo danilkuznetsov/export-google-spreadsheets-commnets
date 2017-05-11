@@ -8,8 +8,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class XlsxService {
 
-    public List<FullComments> fetchFullComments(FileInputStream file) throws IOException {
+    public List<FullComments> fetchFullComments(InputStream file) throws IOException {
 
         List<FullComments> result = new ArrayList<>();
 
