@@ -64,6 +64,15 @@ public class GoogleSpreadSheetsFile {
         return removedReply;
     }
 
+    public List<Comment> getListComment() throws IOException {
+        return drive.comments()
+                .list(fileId)
+                .setFields("comments")
+                .execute()
+                .getComments();
+
+    }
+
     private String deleteReplyByComment(String commentId, String replyId) throws IOException {
         drive.replies().delete(fileId, commentId, replyId).setFields("id").execute();
         return replyId;

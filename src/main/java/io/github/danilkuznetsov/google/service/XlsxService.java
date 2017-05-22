@@ -1,6 +1,6 @@
 package io.github.danilkuznetsov.google.service;
 
-import io.github.danilkuznetsov.google.model.DirtyComments;
+import io.github.danilkuznetsov.google.model.XlsxComment;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -15,9 +15,9 @@ import java.util.List;
  */
 public class XlsxService {
 
-    public List<DirtyComments> fetchFullComments(InputStream file) throws IOException {
+    public List<XlsxComment> fetchComments(InputStream file) throws IOException {
 
-        List<DirtyComments> result = new ArrayList<>();
+        List<XlsxComment> xlsxComments = new ArrayList<>();
 
         XSSFWorkbook workbook = new XSSFWorkbook(file);
 
@@ -37,7 +37,11 @@ public class XlsxService {
                     if (comment != null) {
                         RichTextString commentText = cell.getCellComment().getString();
                         commentText.clearFormatting();
-                        result.add(new DirtyComments(sheet.getSheetName(), cell.getRowIndex(), cell.getColumnIndex(), commentText.getString()));
+                        xlsxComments.add(new XlsxComment(sheet.getSheetName(),
+                                cell.getRowIndex(),
+                                cell.getColumnIndex(),
+                                commentText.getString()
+                               ));
                     }
 
                 }
@@ -45,6 +49,6 @@ public class XlsxService {
         }
 
 
-        return result;
+        return xlsxComments;
     }
 }

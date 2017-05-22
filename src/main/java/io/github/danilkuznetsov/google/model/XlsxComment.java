@@ -16,15 +16,15 @@ import java.util.regex.Pattern;
 @Getter
 @AllArgsConstructor
 @ToString
-public class DirtyComments {
-    private String sheetName;
-    private int row;
-    private int col;
-    private String comments;
+public class XlsxComment {
+    private final String sheetName;
+    private final int row;
+    private final int col;
+    private final String commentContent;
 
     public String getMainCommentId() {
         Pattern pattern = Pattern.compile(".*\\[(.*)\\].*", Pattern.MULTILINE);
-        Matcher matcher = pattern.matcher(comments);
+        Matcher matcher = pattern.matcher(commentContent);
         if (matcher.find()) {
             return matcher.group(1);
         }
