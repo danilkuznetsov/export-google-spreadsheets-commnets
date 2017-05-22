@@ -1,9 +1,6 @@
-package io.github.danilkuznetsov.google.service;
+package io.github.danilkuznetsov.google.model;
 
-import io.github.danilkuznetsov.google.model.XlsxComment;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,15 +14,14 @@ import static org.hamcrest.Matchers.*;
 /**
  * @author Danil Kuznetsov
  */
-@RunWith(JUnit4.class)
-public class XlsxServiceTest {
+public class XlsxFileIntegrationTest {
 
     @Test
     public void shouldFetchAllCommentsFromXlsxDocs() throws IOException, URISyntaxException {
 
         FileInputStream fis = new FileInputStream(new File("src/test/resources/test_export.xlsx"));
-        XlsxService xlsxService = new XlsxService();
-        List<XlsxComment> actualComments = xlsxService.fetchComments(fis);
+        XlsxFile xlsxService = new XlsxFile(fis);
+        List<XlsxComment> actualComments = xlsxService.fetchComments();
 
         assertThat(actualComments, hasSize(5));
         assertThat(actualComments, everyItem(hasProperty("commentContent", notNullValue())));

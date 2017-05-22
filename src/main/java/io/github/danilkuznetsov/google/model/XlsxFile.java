@@ -1,6 +1,5 @@
-package io.github.danilkuznetsov.google.service;
+package io.github.danilkuznetsov.google.model;
 
-import io.github.danilkuznetsov.google.model.XlsxComment;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -13,13 +12,17 @@ import java.util.List;
 /**
  * @author Danil Kuznetsov
  */
-public class XlsxService {
+public class XlsxFile {
 
-    public List<XlsxComment> fetchComments(InputStream file) throws IOException {
+    private InputStream dataFile;
+
+    public XlsxFile(InputStream file) {this.dataFile = file;}
+
+    public List<XlsxComment> fetchComments() throws IOException {
 
         List<XlsxComment> xlsxComments = new ArrayList<>();
 
-        XSSFWorkbook workbook = new XSSFWorkbook(file);
+        XSSFWorkbook workbook = new XSSFWorkbook(dataFile);
 
         Iterator<Sheet> sheets = workbook.iterator();
 
@@ -41,7 +44,7 @@ public class XlsxService {
                                 cell.getRowIndex(),
                                 cell.getColumnIndex(),
                                 commentText.getString()
-                               ));
+                        ));
                     }
 
                 }

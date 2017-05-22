@@ -4,8 +4,6 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import io.github.danilkuznetsov.google.AppStarter;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,8 +16,7 @@ import static org.hamcrest.core.IsNull.notNullValue;
 /**
  * @author Danil Kuznetsov
  */
-@RunWith(JUnit4.class)
-public class GoogleServicesTest {
+public class GoogleServicesIntegrationTest {
 
     @Test
     public void shouldCreateGoogleServiceInstance() throws GeneralSecurityException, IOException {

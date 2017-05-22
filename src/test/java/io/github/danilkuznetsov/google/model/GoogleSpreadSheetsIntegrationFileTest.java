@@ -4,11 +4,8 @@ import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import io.github.danilkuznetsov.google.AppStarter;
 import io.github.danilkuznetsov.google.service.GoogleServices;
-import io.github.danilkuznetsov.google.model.GoogleSpreadSheetsFile;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,8 +20,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Danil Kuznetsov
  */
-@RunWith(JUnit4.class)
-public class GoogleSpreadSheetsFileTest {
+public class GoogleSpreadSheetsIntegrationFileTest {
 
     Drive drive;
     // Test Google spreadsheets file
