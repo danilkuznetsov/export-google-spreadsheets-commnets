@@ -1,5 +1,6 @@
-package io.github.danilkuznetsov.google.model;
+package io.github.danilkuznetsov.google.model.xlsx;
 
+import io.github.danilkuznetsov.google.model.xlsx.XlsxCell;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -28,7 +29,7 @@ public class XlsxCommentsTest {
     public void shouldDecodeMainCommentIdFromStringReplies() {
 
         // given
-        XlsxComment comments = new XlsxComment("test",0, 0, COMMENTS_AND_REPLIES_WITH_COMMENT_ID);
+        XlsxCell comments = new XlsxCell("test",0, 0, COMMENTS_AND_REPLIES_WITH_COMMENT_ID);
         String expectedCommentId = "AAAABIMj-j4";
 
         //when
@@ -41,7 +42,7 @@ public class XlsxCommentsTest {
     @Test(expected = IllegalStateException.class)
     public void shouldThrowExceptionWhenIdNotFound() {
         //given
-        XlsxComment comments = new XlsxComment("test",0, 0, COMMENTS_AND_REPLIES_WITHOUT_COMMENT_ID);
+        XlsxCell comments = new XlsxCell("test",0, 0, COMMENTS_AND_REPLIES_WITHOUT_COMMENT_ID);
         //when
         String actual = comments.getMainCommentId();
     }

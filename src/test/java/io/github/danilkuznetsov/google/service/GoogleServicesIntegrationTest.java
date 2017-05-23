@@ -23,19 +23,19 @@ public class GoogleServicesIntegrationTest {
         InputStream clientSecret = AppStarter.class.getResourceAsStream("/client_secret.json");
 
         Drive drive;
-        GoogleServices googleServices = GoogleServices.newGoogleService()
+        GoogleServicesFactory googleServicesFactory = GoogleServicesFactory.newGoogleServicesFactory()
                 .clientSecret(clientSecret)
                 .applicationName("Export Google Spreadsheets Comments")
                 .scope(DriveScopes.DRIVE)
                 .build();
 
-        drive = googleServices.googleDrive();
+        drive = googleServicesFactory.googleDrive();
         assertThat(drive, is(notNullValue(Drive.class)));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void shouldThrowExceptionWhenClientSecretNotFound() throws GeneralSecurityException, IOException {
-        GoogleServices.newGoogleService()
+        GoogleServicesFactory.newGoogleServicesFactory()
                 .applicationName("Export Google Spreadsheets Comments")
                 .scope(DriveScopes.DRIVE)
                 .build();

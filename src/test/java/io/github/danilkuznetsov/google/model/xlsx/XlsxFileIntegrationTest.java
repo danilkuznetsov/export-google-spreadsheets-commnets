@@ -1,5 +1,7 @@
-package io.github.danilkuznetsov.google.model;
+package io.github.danilkuznetsov.google.model.xlsx;
 
+import io.github.danilkuznetsov.google.model.xlsx.XlsxCell;
+import io.github.danilkuznetsov.google.model.xlsx.XlsxFile;
 import org.junit.Test;
 
 import java.io.File;
@@ -21,7 +23,7 @@ public class XlsxFileIntegrationTest {
 
         FileInputStream fis = new FileInputStream(new File("src/test/resources/test_export.xlsx"));
         XlsxFile xlsxService = new XlsxFile(fis);
-        List<XlsxComment> actualComments = xlsxService.fetchComments();
+        List<XlsxCell> actualComments = xlsxService.fetchXlsxCells();
 
         assertThat(actualComments, hasSize(5));
         assertThat(actualComments, everyItem(hasProperty("commentContent", notNullValue())));

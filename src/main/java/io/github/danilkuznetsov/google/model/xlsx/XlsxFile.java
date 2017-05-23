@@ -1,4 +1,4 @@
-package io.github.danilkuznetsov.google.model;
+package io.github.danilkuznetsov.google.model.xlsx;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,9 +18,9 @@ public class XlsxFile {
 
     public XlsxFile(InputStream file) {this.dataFile = file;}
 
-    public List<XlsxComment> fetchComments() throws IOException {
+    public List<XlsxCell> fetchXlsxCells() throws IOException {
 
-        List<XlsxComment> xlsxComments = new ArrayList<>();
+        List<XlsxCell> xlsxCells = new ArrayList<>();
 
         XSSFWorkbook workbook = new XSSFWorkbook(dataFile);
 
@@ -34,13 +34,14 @@ public class XlsxFile {
                 Row row = rows.next();
 
                 Iterator<Cell> cells = row.cellIterator();
+
                 while (cells.hasNext()) {
                     Cell cell = cells.next();
                     Comment comment = cell.getCellComment();
                     if (comment != null) {
                         RichTextString commentText = cell.getCellComment().getString();
                         commentText.clearFormatting();
-                        xlsxComments.add(new XlsxComment(sheet.getSheetName(),
+                        xlsxCells.add(new XlsxCell(sheet.getSheetName(),
                                 cell.getRowIndex(),
                                 cell.getColumnIndex(),
                                 commentText.getString()
@@ -50,8 +51,7 @@ public class XlsxFile {
                 }
             }
         }
-
-
-        return xlsxComments;
+        return xlsxCells;
     }
+
 }
