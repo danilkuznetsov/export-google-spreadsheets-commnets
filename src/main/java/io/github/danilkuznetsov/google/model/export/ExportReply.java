@@ -1,4 +1,4 @@
-package io.github.danilkuznetsov.google.model;
+package io.github.danilkuznetsov.google.model.export;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Getter
 @ToString
-public class FullReply {
+public class ExportReply {
     private final int col;
     private final int row;
     private final String id;
@@ -23,10 +23,10 @@ public class FullReply {
     private final String modifiedTime;
     private final boolean deleted;
 
-    public FullReply(int col, int row, String id,
-                     String mainCommentId, String sheetsName, String author,
-                     String content, String htmlContent, String createdTime,
-                     String modifiedTime, boolean deleted) {
+    public ExportReply(int col, int row, String id,
+                       String mainCommentId, String sheetsName, String author,
+                       String content, String htmlContent, String createdTime,
+                       String modifiedTime, boolean deleted) {
 
         this.col = col;
         this.row = row;

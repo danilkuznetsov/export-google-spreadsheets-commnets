@@ -1,4 +1,4 @@
-package io.github.danilkuznetsov.google.model;
+package io.github.danilkuznetsov.google.model.export;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @ToString
-public class FullComment {
+public class ExportComment {
     private final int col;
     private final int row;
     private final String id;
@@ -25,7 +25,7 @@ public class FullComment {
     private final String htmlContentComment;
     private final String createdTime;
 
-    private final List<FullReply> replies;
+    private final List<ExportReply> replies;
 
     boolean resolved;
     boolean deleted;
