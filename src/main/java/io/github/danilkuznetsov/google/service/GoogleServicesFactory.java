@@ -24,7 +24,7 @@ import java.util.List;
  * @author Danil Kuznetsov
  */
 
-public class GoogleServices {
+public class GoogleServicesFactory {
 
     private final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
@@ -38,10 +38,10 @@ public class GoogleServices {
 
     private InputStream clientSecrets;
 
-    private GoogleServices(String applicationName,
-                           File dataStoreDir,
-                           List<String> scopes,
-                           InputStream clientSecrets) throws GeneralSecurityException, IOException {
+    private GoogleServicesFactory(String applicationName,
+                                  File dataStoreDir,
+                                  List<String> scopes,
+                                  InputStream clientSecrets) throws GeneralSecurityException, IOException {
         this.applicationName = applicationName;
         this.dataStoreDir = dataStoreDir;
         this.scopes = scopes;
@@ -74,11 +74,11 @@ public class GoogleServices {
         return new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential).setApplicationName(applicationName).build();
     }
 
-    public static GoogleServiceBuilder newGoogleService() throws GeneralSecurityException, IOException {
-        return new GoogleServiceBuilder();
+    public static GoogleServicesFactoryBuilder newGoogleServicesFactory() throws GeneralSecurityException, IOException {
+        return new GoogleServicesFactoryBuilder();
     }
 
-    public static class GoogleServiceBuilder {
+    public static class GoogleServicesFactoryBuilder {
 
         private String applicationName = "Example Application";
 
@@ -88,32 +88,32 @@ public class GoogleServices {
 
         private InputStream clientSecrets;
 
-        public GoogleServiceBuilder clientSecret(InputStream clientSecrets) {
+        public GoogleServicesFactoryBuilder clientSecret(InputStream clientSecrets) {
             this.clientSecrets = clientSecrets;
             return this;
         }
 
-        public GoogleServiceBuilder applicationName(String appName) {
+        public GoogleServicesFactoryBuilder applicationName(String appName) {
             this.applicationName = appName;
             return this;
         }
 
-        public GoogleServiceBuilder scope(String scope) {
+        public GoogleServicesFactoryBuilder scope(String scope) {
             this.scopes.add(scope);
             return this;
         }
 
 
-        public GoogleServiceBuilder dataStoreDir(File dir) {
+        public GoogleServicesFactoryBuilder dataStoreDir(File dir) {
             this.dataStoreDir = dir;
             return this;
         }
 
-        public GoogleServices build() throws GeneralSecurityException, IOException {
+        public GoogleServicesFactory build() throws GeneralSecurityException, IOException {
             if (clientSecrets == null) {
                 throw new IllegalArgumentException("Not found client secret");
             }
-            return new GoogleServices(applicationName, dataStoreDir, scopes, clientSecrets);
+            return new GoogleServicesFactory(applicationName, dataStoreDir, scopes, clientSecrets);
         }
     }
 

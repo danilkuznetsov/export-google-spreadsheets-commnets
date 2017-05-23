@@ -16,11 +16,13 @@ import java.util.regex.Pattern;
 @Getter
 @AllArgsConstructor
 @ToString
-public class XlsxComment {
+public class TableCell {
     private final String sheetName;
+    private final String sheetGoogleId;
     private final int row;
     private final int col;
     private final String commentContent;
+    private final String cellContent;
 
     public String getMainCommentId() {
         Pattern pattern = Pattern.compile(".*\\[(.*)\\].*", Pattern.MULTILINE);
