@@ -3,6 +3,8 @@ package io.github.danilkuznetsov.google.model.google;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.Comment;
 import com.google.api.services.drive.model.Reply;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -14,15 +16,12 @@ import java.util.Map;
 /**
  * @author Danil Kuznetsov
  */
+@AllArgsConstructor
+@Getter
 public class GoogleSpreadSheetsFile {
 
     private final String fileId;
     private final Drive drive;
-
-    public GoogleSpreadSheetsFile(String fileId, Drive driveService) {
-        this.fileId = fileId;
-        this.drive = driveService;
-    }
 
     public Map<String, String> exportIdCommentsToReplies() throws IOException {
 
@@ -64,13 +63,12 @@ public class GoogleSpreadSheetsFile {
         return removedReply;
     }
 
-    public List<Comment> getListComment() throws IOException {
+    public List<Comment> comments() throws IOException {
         return drive.comments()
                 .list(fileId)
                 .setFields("comments")
                 .execute()
                 .getComments();
-
     }
 
     private String deleteReplyByComment(String commentId, String replyId) throws IOException {
