@@ -30,13 +30,13 @@ public class GoogleServicesFactory {
 
     private final HttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 
-    private String applicationName;
+    private final String applicationName;
 
-    private File dataStoreDir;
+    private final File dataStoreDir;
 
-    private List<String> scopes;
+    private final List<String> scopes;
 
-    private InputStream clientSecrets;
+    private final InputStream clientSecrets;
 
     private GoogleServicesFactory(String applicationName,
                                   File dataStoreDir,

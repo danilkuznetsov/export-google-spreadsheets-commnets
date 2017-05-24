@@ -1,16 +1,16 @@
 package io.github.danilkuznetsov.google;
 
 import com.google.api.services.drive.DriveScopes;
-import io.github.danilkuznetsov.google.model.DirtyComments;
-import io.github.danilkuznetsov.google.model.GoogleSpreadSheetsFile;
-import io.github.danilkuznetsov.google.service.GoogleServices;
-import io.github.danilkuznetsov.google.service.XlsxService;
+import io.github.danilkuznetsov.google.model.export.ExportCell;
+import io.github.danilkuznetsov.google.model.export.ExportRow;
+import io.github.danilkuznetsov.google.model.export.ExportSheet;
+import io.github.danilkuznetsov.google.model.google.GoogleSpreadSheetsFile;
+import io.github.danilkuznetsov.google.service.DataExportService;
+import io.github.danilkuznetsov.google.service.GoogleServicesFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Danil Kuznetsov
@@ -19,28 +19,34 @@ public class AppStarter {
 
     public static void main(String[] args) throws IOException, GeneralSecurityException {
 
-        String fileId = "1l6CgfeUWBFVM88CPloI20OPdUmOb4JdlKdasTmkCDzU";
+        String fileId = "1yVo6LB_D4Fdq2zxjhUyvjjHm7XU_T9SBacTrB3m0Isc";
 
-        GoogleServices googleServices = GoogleServices.newGoogleService()
+        GoogleServicesFactory googleServicesFactory = GoogleServicesFactory.newGoogleServicesFactory()
                 .applicationName("Google spreadsheets comments expoter")
                 .clientSecret(AppStarter.class.getResourceAsStream("/client_secret.json"))
                 .scope(DriveScopes.DRIVE)
                 .build();
 
-        GoogleSpreadSheetsFile gsrsFile = new GoogleSpreadSheetsFile(fileId, googleServices.googleDrive());
+        GoogleSpreadSheetsFile googleFile = new GoogleSpreadSheetsFile(fileId, googleServicesFactory.googleDrive());
 
-        Map<String, String> replies = gsrsFile.exportIdCommentsToReplies();
-        byte[] file = gsrsFile.exportToXlsx();
-        ByteArrayInputStream is = new ByteArrayInputStream(file);
+        DataExportService service = new DataExportService();
 
-        XlsxService service = new XlsxService();
-        List<DirtyComments> comments = service.fetchFullComments(is);
+        List<ExportSheet> sheets = service.exportDataForGoogleSpreadsheet(googleFile);
 
-        gsrsFile.removeRepliesByCommentId(replies);
+        OutputStream f = new FileOutputStream("Result.txt", true);
+        OutputStreamWriter writer = new OutputStreamWriter(f);
+        BufferedWriter out = new BufferedWriter(writer);
 
-        for (DirtyComments comment : comments) {
-            System.out.println(comment);
+        for (ExportSheet sheet : sheets) {
+            out.write(sheet.getSheetName()  + "\n");
+            for (ExportRow row : sheet.getRows()) {
+                out.write("  " +row.getRowNumber() +  "\n");
+                for(ExportCell cell : row.getCells()){
+                    out.write("    " + cell + "\n");
+                }
+            }
         }
 
+        out.flush();
     }
 }

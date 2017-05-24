@@ -1,23 +1,15 @@
 package io.github.danilkuznetsov.google.model.export;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author Danil Kuznetsov
  */
-@EqualsAndHashCode
-@Getter
-@AllArgsConstructor
-@ToString
+@Data
 public class ExportCell {
-
-    private int col;
-    private int row;
-
-    private String sheetName;
-    private String cellContent;
-    private ExportComment comment;
+    private final int col;
+    private final int row;
+    private final String sheetName;
+    private final String cellContent;
+    private final ExportComment comment;
 }

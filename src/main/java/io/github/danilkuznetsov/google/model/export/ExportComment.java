@@ -1,9 +1,6 @@
 package io.github.danilkuznetsov.google.model.export;
 
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.Data;
 
 import java.util.List;
 
@@ -11,10 +8,7 @@ import java.util.List;
  * @author Danil Kuznetsov
  */
 
-@EqualsAndHashCode
-@Getter
-@AllArgsConstructor
-@ToString
+@Data
 public class ExportComment {
     private final int col;
     private final int row;
@@ -24,10 +18,8 @@ public class ExportComment {
     private final String contentComment;
     private final String htmlContentComment;
     private final String createdTime;
-
     private final List<ExportReply> replies;
-
-    boolean resolved;
-    boolean deleted;
-
+    private final boolean resolved;
+    private final boolean deleted;
+    private final String sheetGoogleId;
 }

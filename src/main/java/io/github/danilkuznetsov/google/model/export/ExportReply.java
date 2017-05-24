@@ -1,15 +1,11 @@
 package io.github.danilkuznetsov.google.model.export;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.ToString;
+import lombok.*;
 
 /**
  * @author Danil Kuznetsov
  */
-@EqualsAndHashCode
-@Getter
-@ToString
+@Data
 public class ExportReply {
     private final int col;
     private final int row;
@@ -22,22 +18,6 @@ public class ExportReply {
     private final String createdTime;
     private final String modifiedTime;
     private final boolean deleted;
+    private final String sheetGoogleId;
 
-    public ExportReply(int col, int row, String id,
-                       String mainCommentId, String sheetsName, String author,
-                       String content, String htmlContent, String createdTime,
-                       String modifiedTime, boolean deleted) {
-
-        this.col = col;
-        this.row = row;
-        this.id = id;
-        this.mainCommentId = mainCommentId;
-        this.sheetsName = sheetsName;
-        this.author = author;
-        this.content = content;
-        this.htmlContent = htmlContent;
-        this.createdTime = createdTime;
-        this.modifiedTime = modifiedTime;
-        this.deleted = deleted;
-    }
 }
